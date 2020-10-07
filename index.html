@@ -19,23 +19,23 @@
                 <input type="text" id="author"> 
             </label>
             <label>Pages
-                <input type="text" id="pages">
+                <input type="number" id="pages">
             </label>
             <label>Have you read this yet?
                 <label> Read
-                    <input type="radio" name="hasRead" id="read" value="Read">
+                    <input type="radio" name="hasRead" id="read" value="read">
                 </label>
                 <label>Not Read
-                    <input type="radio" name="hasRead" id="unread" value="Not Read">
+                    <input type="radio" name="hasRead" id="unread" value="unread" selected>
                 </label>
             </label>
+            <button type="button" id="button_add-book">Add Book to Library</button>
         </form>
-        <button id="button_add-book">Add Book to Library</button>
         <div id="table-container">
-            <div id="title" class="table-column"></div>
-            <div id="author" class="table-column"></div>
-            <div id="pages" class="table-column"></div>
-            <div id="hasRead" class="table-column"></div>
+            <div id="table_title" class="table-column"></div>
+            <div id="table_author" class="table-column"></div>
+            <div id="table_pages" class="table-column"></div>
+            <div id="table_hasRead" class="table-column"></div>
         </div>
     </main>
     <script src="js/scripts.js"></script>
