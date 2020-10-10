@@ -40,21 +40,20 @@ function addToTable() {
     document.querySelector("#table-container").appendChild(tableAuthor);
 
     // create and push pages
-    let tablePages = document.createElement("h5");
+    let tablePages = document.createElement("p");
     tablePages.textContent = myLibrary[i].pages;
     document.querySelector("#table-container").appendChild(tablePages);
     
     // create and push message if it's been read
-    let tableHasRead = document.createElement("h5");
+    let tableHasRead = document.createElement("h4");
     tableHasRead.textContent = myLibrary[i].hasRead;
     //create container div that will work as the read/unread toggle
     let tableReadToggle = document.createElement("div");
-    tableReadToggle.classList.add("read-toggle");
+    //set the read class depending on what the user selected
+    if ((myLibrary[i].hasRead == "Read") ? tableReadToggle.classList.add("read_toggle-read") : tableReadToggle.classList.add("read_toggle-unread"));
     tableReadToggle.dataset.indexNumber = [i];
     document.querySelector("#table-container").appendChild(tableReadToggle);
     tableReadToggle.appendChild(tableHasRead);
-
-    //create toggle to allow user to change the book's read status
     
     // create and push delete button
     let buttonDelete = document.createElement("button");
@@ -62,7 +61,7 @@ function addToTable() {
     buttonDelete.classList.add("button_delete");
     //assign the button with a specific data number for deletion purposes
     buttonDelete.dataset.indexNumber = [i];
-    buttonDelete.textContent = "Remove from Library";
+    buttonDelete.textContent = "Remove";
     document.querySelector("#table-container").appendChild(buttonDelete);
 
     
@@ -87,6 +86,7 @@ function addToTable() {
     //add event listener to the read toggle div
     tableReadToggle.addEventListener("click", () => {
       let indexNumber = tableReadToggle.dataset.indexNumber;
+
       //change read status on click
       if (myLibrary[indexNumber].hasRead == "Not Read") {
         myLibrary[indexNumber].hasRead = "Read";
@@ -127,16 +127,30 @@ const inputPages = document.querySelector("#pages");
 const inputHasRead = document.querySelector("#read");
 
 newBookButton.addEventListener("click", () => {
-  //run addBookToLibrary function using user's input values as the arguments
-  addBookToLibrary(inputTitle.value, inputAuthor.value, inputPages.value, inputHasRead.checked);
-  // remove all previous table elements - if any
-  let tableContainer = document.querySelector("#table-container");
+  //check if forms have been filled out before doing anything 
+  if (inputTitle.value != "" && inputAuthor.value != "" && inputPages.value != "") {
+    
+    //run addBookToLibrary function using user's input values as the arguments
+    addBookToLibrary(inputTitle.value, inputAuthor.value, inputPages.value, inputHasRead.checked);
+    // remove all previous table elements - if any
+    let tableContainer = document.querySelector("#table-container");
 
-  while (tableContainer.firstChild) {
-    tableContainer.removeChild(tableContainer.firstChild);
+    while (tableContainer.firstChild) {
+      tableContainer.removeChild(tableContainer.firstChild);
+    }
+
+    addToTable(myLibrary);
+    // // clear the forms
+    inputTitle.value = " ";
+    inputAuthor.value = " ";
+    inputPages.value = "";
+    inputHasRead.value = "Not Read";
   }
 
-  addToTable(myLibrary);
+  else {
+    alert("Please fill out all the book information")
+  }
+
 });
 
 

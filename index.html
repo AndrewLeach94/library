@@ -8,7 +8,8 @@
 </head>
 <body>
     <header>
-        <h1>Library</h1>
+        <h1>My Library</h1>
+        <p>Save and track the read status of some of your favorite books.</p>
     </header>
     <main>
         <form>
@@ -19,25 +20,23 @@
                 <input type="text" id="author"> 
             </label>
             <label>Pages
-                <input type="number" id="pages">
+                <input type="number" id="pages" min=1>
             </label>
-            <label>Have you read this yet?
-                <label> Read
-                    <input type="radio" name="hasRead" id="read" value="read">
-                </label>
-                <label>Not Read
-                    <input type="radio" name="hasRead" id="unread" value="unread" selected>
-                </label>
+            <label id="radio-button-container">
+                <input type="radio" name="hasRead" id="read" class="button_radio" value="read">
+                <label for="read" class="radio" id="radio_read"> Read</label>
+                <input type="radio" name="hasRead" id="unread" class="button_radio" value="unread" selected>
+                <label for="unread" class="radio" id="radio_unread">Not Read</label>
             </label>
             <button type="button" id="button_add-book">Add Book to Library</button>
         </form>
-        <div id="table-container">
-            <!-- <div id="table_title" class="table-column"></div>
-            <div id="table_author" class="table-column"></div>
-            <div id="table_pages" class="table-column"></div>
-            <div id="table_hasRead" class="table-column"></div>
-            <div id="table_delete" class="table-column"></div> -->
+        <div id="table-container-outer">
+            <div class="table-header">Title:</div>
+            <div class="table-header">Author:</div>
+            <div class="table-header">Pages:</div>
+            <div class="table-header">Status:</div>
         </div>
+        <div id="table-container"></div>
     </main>
     <script src="js/scripts.js"></script>
 </body>
