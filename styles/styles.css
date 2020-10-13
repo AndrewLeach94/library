@@ -136,6 +136,7 @@ form input:focus {
     box-shadow: 0px 0px 10px #0000001f;
     margin: 0px 30px;
     padding: 20px;
+    text-align: center;
 }
 
 .read_toggle-unread {
@@ -205,4 +206,93 @@ form input:focus {
 
 .button_radio {
     display: none;
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+footer a {
+    text-decoration: none;
+    margin-right: 8px;
+}
+
+footer h6 {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+button i {
+    margin-right: 5px;
+}
+
+
+
+
+/* ---------------------------------------------------------------------
+                                MEDIA QUERIES                                           
+--------------------------------------------------------------------------------------------------- */
+
+@media (max-width: 1000px ) {
+    main {
+        display: flex;
+        flex-direction: column;
+    }
+
+    form {
+        align-content: stretch;
+        width: 50vw;
+    }
+
+    #radio-button-container {
+        margin-bottom: 30px;
+    }
+
+    #table-container-outer {
+        margin-top: 60px;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        text-align: center;
+    }
+    main {
+        align-items: center;
+        align-content: center;
+    }
+
+    #table-container-outer {
+        align-self: stretch;
+    }
+}
+
+@media (max-width: 469px) {
+    form {
+        max-width: 100%;
+    }
+
+    .radio {
+        width: 100%;
+        border-radius: 10px;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    #table-container-outer {
+        display: none;
+    }
+
+    #table-container {
+        margin: 50px 0px 20px;
+        grid-template-columns: 1fr;
+    }
+
+    h3:nth-child(n+2) {
+        margin-top: 120px;
+    }
 }

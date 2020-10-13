@@ -1,5 +1,14 @@
-let myLibrary = [];
-let newBook;
+// Initialize library - sync with database if applicable
+let myLibrary;
+dbLibrary.on("value", snap => {
+  if (snap.exists() == true) {
+    myLibrary = snap.val()  
+    addToTable()
+  }
+  else {
+    myLibrary = [];
+  }
+})   
 
 // create object constructor
 function Book(title, author, pages, hasRead ) {  
@@ -7,19 +16,16 @@ function Book(title, author, pages, hasRead ) {
     this.author = author
     this.pages = pages
     if ((hasRead == true) ? this.hasRead = "Read" : this.hasRead = "Not Read");
-    this.message = function () {
-      let read;
-      if ((this.hasRead == true) ? read = "has read" : read = "has not read");
-      return (this.title + " by " + this.author + " is " + this.pages + " pages long: " + read);
-    }
-  
   }    
     
 function addBookToLibrary(title, author, pages, hasRead) {
-  // do stuff here
   newBook = new Book(title, author, pages, hasRead)
-
+  
+  // push new book to local library 
   myLibrary.push(newBook);
+  
+  //update cloud database 
+  dbLibrary.update(myLibrary);
 
 }
 
@@ -71,8 +77,10 @@ function addToTable() {
       let indexNumber = buttonDelete.dataset.indexNumber;
       // remove the book associated with the data attribute - deletes the only book if there is only one
       if ((myLibrary.length > 1) ? myLibrary.splice(indexNumber, indexNumber) : myLibrary.splice(0, 1));
-      
-      
+
+      //update the database
+      dbLibrary.set(myLibrary);
+
       //rebuild the table and library with new data attributes for remaining buttons
       let tableContainer = document.querySelector("#table-container");
 
@@ -90,6 +98,9 @@ function addToTable() {
       //change read status on click
       if (myLibrary[indexNumber].hasRead == "Not Read") {
         myLibrary[indexNumber].hasRead = "Read";
+        
+        //update database
+        dbLibrary.set(myLibrary);
 
         //update table
         let tableContainer = document.querySelector("#table-container");
@@ -97,12 +108,14 @@ function addToTable() {
         while (tableContainer.firstChild) {
           tableContainer.removeChild(tableContainer.firstChild);
         }
-  
+        //update table
         addToTable(myLibrary);
       }
 
       else {
         myLibrary[indexNumber].hasRead = "Not Read";
+        //update database
+        dbLibrary.set(myLibrary);
 
         //update table
         let tableContainer = document.querySelector("#table-container");
@@ -110,11 +123,9 @@ function addToTable() {
         while (tableContainer.firstChild) {
           tableContainer.removeChild(tableContainer.firstChild);
         }
-  
-        addToTable(myLibrary);
-        
+        //update table
+        addToTable(myLibrary);        
       }
-
     })
   }
 }
