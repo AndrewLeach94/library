@@ -14,4 +14,4 @@ This is built entirely in vanilla javascript and uses Firebase on the backend to
 ##### Checklist
 - [x] Finish scripts (10/8/2020) 
 - [x] Design final UI (10/9/2020)
-- [x] Add cloud storage
+- [x] Add cloud storage (10/13/2020)
