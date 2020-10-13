@@ -14,37 +14,8 @@
     firebase.initializeApp(firebaseConfig);
     firebase.analytics();
 
-    // get elements
-    
-    // const dbLibrary = myLibrary;
-    const dbTest = document.querySelector("#test");
-
-    // create reference
-    // const dbRefTest = firebase.database().ref().child("myLibrary");
-
-    // sync object changes
+    // create database reference
 
     let dbLibrary = firebase.database().ref().child("myLibrary");
-    dbLibrary.set({
-        book1: {
-            author: "JK Rowling2",
-            title: "Damn it to hell"    
-        },
 
-        book2 : {
-            author: "Andrew Leach",
-            title: "The Turd"
-        }
-    })
-
-    dbLibrary.on("value", snap => console.log(snap.val()));
-
-    function newBookTest() {
-        dbLibrary.update({
-           book3 : {
-               author: "Andrew",
-               title: "Nothing Burger"
-           } 
-        })
-    }
 
