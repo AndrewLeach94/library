@@ -11,12 +11,13 @@ dbLibrary.on("value", snap => {
 })   
 
 // create object constructor
-function Book(title, author, pages, hasRead ) {  
+class Book {  
+  constructor (title, author, pages, hasRead) {
     this.title = title
     this.author = author
     this.pages = pages
     if ((hasRead == true) ? this.hasRead = "Read" : this.hasRead = "Not Read");
-  }    
+  }}    
     
 function addBookToLibrary(title, author, pages, hasRead) {
   newBook = new Book(title, author, pages, hasRead)
